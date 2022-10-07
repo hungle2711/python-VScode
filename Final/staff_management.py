@@ -29,7 +29,26 @@ def check_blank_data():
     else:
         msb.showwarning('Warnning',message+'is blank!')
         return False  
-        
+
+def validate_phone(value):
+    # Bắt lỗi nhập số điện thoại
+    # '^0': ký tự đầu phải là 0; 'd{9}': yêu cầu phải là số 
+    pattern = '^0\d{9}'
+    if entry_value_phone.get() !='':
+        if re.fullmatch(pattern, entry_value_phone.get()) is None:
+            return False
+        else:
+            return True
+    
+def validate_age(value):
+    pattern = '\d+'
+    if entry_value_age.get() !='':
+        if re.fullmatch(pattern, entry_value_age.get()) is None:
+            return False
+        else:
+            return True
+
+
 def save_data():
     wb.save('staff_list.xlsx')
 
@@ -191,6 +210,7 @@ entry_id.grid(row=0,column=1,sticky='w',pady='5')
 
 entry_age = ttk.Entry(frame_input_info,textvariable=entry_value_age)
 entry_age.grid(row=0,column=3,sticky='w',pady='5')
+
 
 entry_full_name = ttk.Entry(frame_input_info,textvariable=entry_value_full_name)
 entry_full_name.grid(row=1,column=1,sticky='w',pady='5')
